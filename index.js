@@ -19,10 +19,11 @@ const getImageBuffer = async (url, selector) => {
 module.exports = async (req, res) => {
   try {
     const { url, selector } = parse(req.url, true).query;
-    console.log('url', url, 'selector', selector)
+    console.log("url", url, "selector", selector);
     const buffer = await getImageBuffer(url, selector);
     res.end(buffer, "binary");
   } catch (error) {
+    console.log("ERROR", error);
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");
     return { error };
